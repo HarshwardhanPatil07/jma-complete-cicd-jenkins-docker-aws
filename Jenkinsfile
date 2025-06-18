@@ -67,6 +67,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                        sh 'git config user.email "harshwardhanpatil07@yahoo.com"'
+                        sh 'git config user.name "HarshwardhanPatil07"'
                         sh 'git remote set-url origin https://$USER:$PASS@github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git'
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
