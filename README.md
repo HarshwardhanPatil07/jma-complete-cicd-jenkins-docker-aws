@@ -330,6 +330,41 @@ git merge main --strategy-option=theirs
 git push origin jenkins-jobs
 ```
 
+#### 🔴 Docker Daemon Not Running
+**Error**: `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?`
+
+**Solutions**:
+1. **Check Docker daemon status**:
+   ```bash
+   sudo systemctl status docker
+   ```
+
+2. **Start Docker daemon**:
+   ```bash
+   sudo systemctl start docker
+   sudo systemctl enable docker  # Auto-start on boot
+   ```
+
+3. **Add Jenkins user to Docker group**:
+   ```bash
+   sudo usermod -aG docker jenkins
+   # Restart Jenkins service after this
+   sudo systemctl restart jenkins
+   ```
+
+4. **Manual Docker socket permissions** (if needed):
+   ```bash
+   sudo chmod 666 /var/run/docker.sock
+   ```
+
+5. **Verify Docker is working**:
+   ```bash
+   docker version
+   docker run hello-world
+   ```
+
+**Note**: The shared library now automatically attempts to start Docker daemon if it's stopped.
+
 ### 7. Branch Maintenance
 
 #### Syncing Branches
