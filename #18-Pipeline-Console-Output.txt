@@ -1,0 +1,418 @@
+Started by user Harshwardhan
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-98a0650683f9a402e0552cce77b3c211/.git # timeout=10
+Setting origin to https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git
+ > git config remote.origin.url https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git config --get remote.origin.url # timeout=10
+using GIT_ASKPASS to set credentials GitHub Personal Access Token
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/jenkins-jobs
+Seen branch in repository origin/jenkins-shared-library
+Seen branch in repository origin/main
+Seen 3 remote branches
+Obtained Jenkinsfile from 45a3ac1340449357969c8f784afc773e8efadd9f
+Loading library jenkins-shared-library@jenkins-shared-library
+Attempting to resolve jenkins-shared-library from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GitHub Personal Access Token
+ > git ls-remote -h -- https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git # timeout=10
+Found match: refs/heads/jenkins-shared-library revision 167f3afecffdefa79ea6ce74e43d4b6477f59341
+The recommended git tool is: git
+using credential github-credentials
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs@libs/511f57cbba8e6be88432dc3222ee7bc209b2eab5a9ea95e15710cbd0243934e9/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GitHub Personal Access Token
+ > git fetch --no-tags --force --progress -- https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 167f3afecffdefa79ea6ce74e43d4b6477f59341 (jenkins-shared-library)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 167f3afecffdefa79ea6ce74e43d4b6477f59341 # timeout=10
+Commit message: "Fix Docker permission denied issue in buildImage function"
+ > git rev-list --no-walk 1157bbd54b779cb0f78f9486d3667d9407b1d041 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential github-credentials
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GitHub Personal Access Token
+ > git fetch --no-tags --force --progress -- https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 45a3ac1340449357969c8f784afc773e8efadd9f (jenkins-jobs)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 45a3ac1340449357969c8f784afc773e8efadd9f # timeout=10
+Commit message: "Fix SSH host key verification for SCP commands"
+ > git rev-list --no-walk 1157bbd54b779cb0f78f9486d3667d9407b1d041 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (increment version)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+incrementing app version...
+[Pipeline] sh
++ mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion} versions:commit
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.example:java-maven-app >---------------------
+[INFO] Building java-maven-app 1.1.2
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- build-helper:3.6.1:parse-version (default-cli) @ java-maven-app ---
+[INFO] 
+[INFO] ---------------------< com.example:java-maven-app >---------------------
+[INFO] Building java-maven-app 1.1.2
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions:2.18.0:set (default-cli) @ java-maven-app ---
+[INFO] Searching for local aggregator root...
+[INFO] Local aggregation root: /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs
+[INFO] Processing change of com.example:java-maven-app:1.1.2 -> 1.1.3
+[INFO] Processing com.example:java-maven-app
+[INFO]     Updating project com.example:java-maven-app
+[INFO]         from version 1.1.2 to 1.1.3
+[INFO] 
+[INFO] 
+[INFO] ---------------------< com.example:java-maven-app >---------------------
+[INFO] Building java-maven-app 1.1.2
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions:2.18.0:commit (default-cli) @ java-maven-app ---
+[INFO] Accepting all changes to /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs/pom.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.950 s
+[INFO] Finished at: 2025-06-18T17:10:16Z
+[INFO] ------------------------------------------------------------------------
+[WARNING] 
+[WARNING] Plugin validation issues were detected in 1 plugin(s)
+[WARNING] 
+[WARNING]  * org.apache.maven.plugins:maven-site-plugin:3.12.1
+[WARNING] 
+[WARNING] For more or less details, use 'maven.plugin.validation' property with one of the values (case insensitive): [BRIEF, DEFAULT, VERBOSE]
+[WARNING] 
+[Pipeline] readFile
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build app)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+building application jar...
+[Pipeline] echo
+building the application...
+[Pipeline] sh
++ mvn package
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.example:java-maven-app >---------------------
+[INFO] Building java-maven-app 1.1.3
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.0:resources (default-resources) @ java-maven-app ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.6.0:compile (default-compile) @ java-maven-app ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.0:testResources (default-testResources) @ java-maven-app ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.6.0:testCompile (default-testCompile) @ java-maven-app ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:3.0.0:test (default-test) @ java-maven-app ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running AppTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s - in AppTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ java-maven-app ---
+[INFO] Building jar: /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs/target/java-maven-app-1.1.3.jar
+[INFO] 
+[INFO] --- spring-boot:2.3.5.RELEASE:repackage (default) @ java-maven-app ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.929 s
+[INFO] Finished at: 2025-06-18T17:10:25Z
+[INFO] ------------------------------------------------------------------------
+[WARNING] 
+[WARNING] Plugin validation issues were detected in 2 plugin(s)
+[WARNING] 
+[WARNING]  * org.apache.maven.plugins:maven-resources-plugin:3.3.0
+[WARNING]  * org.apache.maven.plugins:maven-compiler-plugin:3.6.0
+[WARNING] 
+[WARNING] For more or less details, use 'maven.plugin.validation' property with one of the values (case insensitive): [BRIEF, DEFAULT, VERBOSE]
+[WARNING] 
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build image)
+[Pipeline] sh
++ docker version
+Client:
+ Version:           20.10.24+dfsg1
+ API version:       1.41
+ Go version:        go1.19.8
+ Git commit:        297e128
+ Built:             Fri Apr 18 15:01:23 2025
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Desktop 4.38.0 (181591)
+ Engine:
+  Version:          27.5.1
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.22.11
+  Git commit:       4c9b3b0
+  Built:            Wed Jan 22 13:41:17 2025
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.7.25
+  GitCommit:        bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
+ runc:
+  Version:          1.1.12
+  GitCommit:        v1.1.12-0-g51d5e946
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+building the docker image...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ which docker
+[Pipeline] sh
++ docker version
++ echo accessible
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
++ docker build -t harshwardhan07/harshwardhan:jenkinsJMA-1.0 .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:b08694307da37486982d9b0b1e2e17915c857cd2ab6e2dc399476d3fc7e43b0e
+#1 transferring dockerfile: 236B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/amazoncorretto:8-alpine3.17-jre
+#2 sha256:4c246f17d5d7ad929652a8df381e6cbeed68fbb13cff0d5e965d3d593b328b22
+#2 DONE 1.2s
+
+#3 [internal] load .dockerignore
+#3 sha256:5b201e5546e4bffe316085147ccd754a186abbdbd8c122f2e52249fa09e908ad
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#7 [1/3] FROM docker.io/library/amazoncorretto:8-alpine3.17-jre@sha256:3dbdce03fbe921966033eca64c4f75c949bbe85785ed243e99ed4a335d784bda
+#7 sha256:7316c93ad1fe21e5938c4d45ba69fd0de37335dbec112499e83c62ee931c0c3f
+#7 DONE 0.0s
+
+#6 [internal] load build context
+#6 sha256:e3d0312e438ed59f07c8a2a95ac857416d97c6d46d238b147702832402a7e9b2
+#6 transferring context: 90B done
+#6 DONE 0.0s
+
+#5 [2/3] COPY ./target/java-maven-app-1.1.0-SNAPSHOT.jar /usr/app/
+#5 sha256:0a587b248f6e283e7782dbe99693916d791e06e38f3ca4bd344fb5b38b26dbf1
+#5 CACHED
+
+#4 [3/3] WORKDIR /usr/app
+#4 sha256:a0fc652bc602d7a17e73bbe5f051f63112f23e725239a852b134bf63be77f7f1
+#4 CACHED
+
+#8 exporting to image
+#8 sha256:3aa9ea13e60700f6b5cb0f5af9677b74f955d60f3d06577f3d36a29aa1d693e1
+#8 exporting layers done
+#8 writing image sha256:ce254ce0e122fc4dfd1612eebeedaaa6b9a58fe244896abc23366ff85cf7ac98 done
+#8 naming to docker.io/harshwardhan07/harshwardhan:jenkinsJMA-1.0 done
+#8 DONE 0.0s
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [PASS]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo ****
++ docker login -u harshwardhanpatil07@yahoo.com --password-stdin
+WARNING! Your password will be stored unencrypted in /var/jenkins_home/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] sh
++ docker push harshwardhan07/harshwardhan:jenkinsJMA-1.0
+The push refers to repository [docker.io/harshwardhan07/harshwardhan]
+5f70bf18a086: Preparing
+53199a970661: Preparing
+432a00a9effe: Preparing
+8d78b2117a5b: Preparing
+5f70bf18a086: Layer already exists
+8d78b2117a5b: Layer already exists
+432a00a9effe: Layer already exists
+53199a970661: Layer already exists
+jenkinsJMA-1.0: digest: sha256:b484884d5234785213b1ea1139d10bbd84c36f41737af58e220544aff4912a13 size: 1158
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+deploying the application...
+[Pipeline] sshagent
+[ssh-agent] Using credentials ec2-user
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-VCkAE3sHnfVB/agent.1724
+SSH_AGENT_PID=1727
+Running ssh-add (command line suppressed)
+Identity added: /var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs@tmp/private_key_10974610570414640110.key (/var/jenkins_home/workspace/ultibranch-Pipeline_jenkins-jobs@tmp/private_key_10974610570414640110.key)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ scp -o StrictHostKeyChecking=no server-cmds.sh ec2-user@54.237.251.57:/home/ec2-user
+Warning: Permanently added '54.237.251.57' (ED25519) to the list of known hosts.
+[Pipeline] sh
++ scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@54.237.251.57:/home/ec2-user
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ec2-user@54.237.251.57 bash ./server-cmds.sh 1.1.3-18
+ postgres Pulling 
+ java-maven-app Pulling 
+ java-maven-app Error 
+success
+ postgres Error 
+Error response from daemon: pull access denied for 1.1.3-18, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 1727 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (commit version update)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
++ git config user.email harshwardhanpatil07@yahoo.com
+[Pipeline] sh
++ git config user.name HarshwardhanPatil07
+[Pipeline] sh
++ git remote set-url origin https://HarshwardhanPatil07:****@github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git
+[Pipeline] sh
++ git add .
+[Pipeline] sh
++ git commit -m ci: version bump
+[detached HEAD aef1715] ci: version bump
+ 6 files changed, 7 insertions(+), 7 deletions(-)
+ create mode 100644 target/java-maven-app-1.1.3.jar
+ create mode 100644 target/java-maven-app-1.1.3.jar.original
+[Pipeline] sh
++ git push origin HEAD:jenkins-jobs
+To https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git
+   45a3ac1..aef1715  HEAD -> jenkins-jobs
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

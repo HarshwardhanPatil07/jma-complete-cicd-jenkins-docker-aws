@@ -5,10 +5,11 @@ A complete CI/CD pipeline implementation using Jenkins, Docker, and AWS EC2 for 
 
 ## 🎯 Pipeline Success
 
-![Successful Pipeline](asset/Successful-Pipeline-10.png)
-![Pipeline Stages](asset/Stages-10.png)
-![EC2](AWS-EC2.png)
-![Docker-Container](Docker-Container.png)
+![Successful Pipeline](/asset/Successful-Pipeline-18.png)
+![Stages](/asset/stages-18.png)
+![EC2](/asset/AWS-EC2.png)
+![Docker-Container](/asset/Docker-Container.png)
+
 
 ## 📋 Project Overview
 
@@ -16,6 +17,55 @@ This project demonstrates a fully automated CI/CD pipeline that:
 - Builds a Java Maven Spring Boot application
 - Packages it as a Docker container
 - Deploys it to AWS EC2 using Jenkins Pipeline
+
+
+
+## 🌿 Branch Structure & Functionality
+
+This repository maintains three specialized branches with distinct purposes:
+
+### `main` Branch
+- **Purpose**: Production-ready code and stable documentation
+- **Contains**: 
+  - Latest stable version of the application source code
+  - Project documentation and setup guides
+  - Asset files and screenshots
+  - Core configuration files
+
+### `jenkins-jobs` Branch  
+- **Purpose**: Active CI/CD pipeline execution and automation
+- **Functionality**:
+  - **Automated Version Management**: Increments Maven version numbers automatically (e.g., 1.1.0 → 1.1.1)
+  - **Continuous Integration**: Builds Java Maven application and runs tests
+  - **Docker Operations**: Builds Docker images and pushes to Docker Hub (`harshwardhan07/harshwardhan:jenkinsJMA-1.0`)
+  - **AWS EC2 Deployment**: Deploys containerized application to EC2 instance via SSH
+  - **Auto-commit**: Commits version bumps back to jenkins-jobs branch automatically
+  - **Pipeline Monitoring**: Tracks build history and deployment status
+
+### `jenkins-shared-library` Branch
+- **Purpose**: Reusable Jenkins pipeline functions
+- **Contains**:
+  - `vars/buildJar.groovy` - Maven build function
+  - `vars/buildImage.groovy` - Docker build and push function with error handling
+  - `vars/deployApp.groovy` - Deployment function
+  - Shared pipeline utilities and common functions
+
+### Pipeline Workflow
+```
+jenkins-jobs branch → Jenkins Pipeline → Docker Hub → AWS EC2
+       ↓                     ↓              ↓          ↓
+Version increment    Build & Test    Push Image   Deploy App
+Auto-commit         Use shared lib   Registry     Live service
+```
+
+**Key Features of jenkins-jobs branch**:
+- ✅ Fully automated CI/CD pipeline with 5 stages
+- ✅ Automatic version incrementation and Git commits
+- ✅ Docker image building with permission handling
+- ✅ AWS EC2 deployment with SSH automation
+- ✅ Enhanced error handling and troubleshooting
+- ✅ Integration with shared library functions
+
 
 ## 🏗️ Architecture
 
@@ -107,4 +157,4 @@ docker run -p 3080:3080 -d harshwardhan07/my-app:1.0
 ### Logs
 Check the pipeline console output for detailed logs:
 - Available in Jenkins job → Build History → Console Output
-- Sample output available in [`#10-Pipeline-Console-Output.txt`](#10-Pipeline-Console-Output.txt)
+- Sample output available in [`#18-Pipeline-Console-Output.txt`](#18-Pipeline-Console-Output.txt)
