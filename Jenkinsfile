@@ -53,7 +53,7 @@ pipeline {
                     
                     // Custom deployment logic for EC2
                     def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
-                    def ec2Instance = "ec2-user@107.23.253.31"
+                    def ec2Instance = "ec2-user@54.237.251.57"
 
                     sshagent(['ec2-server-key']) {
                         sh "scp server-cmds.sh ${ec2Instance}:/home/ec2-user"
