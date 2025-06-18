@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
 
-library identifier: 'jenkins-shared-lib@main', retriever: modernSCM(
+library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
     [$class: 'GitSCMSource',
-    remote: 'https://github.com/HarshwardhanPatil07/jenkins-java-maven-app.git',
-    credentialsID: 'gitlab-credentials'
+    remote: 'https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git',
+    credentialsID: 'github-credentials'
     ]
 )
 
