@@ -2,10 +2,48 @@
 
 A complete CI/CD pipeline implementation using Jenkins, Docker, and AWS EC2 for a Spring Boot application.
 
+## 🌿 Branch Structure
+
+This repository maintains two main branches with distinct functionalities:
+
+### `main` Branch
+- **Purpose**: Production-ready code and documentation
+- **Contains**: 
+  - Latest stable version of the application
+  - Complete project documentation
+  - Asset files and screenshots
+  - Final configuration files
+
+### `jenkins-jobs` Branch  
+- **Purpose**: Active CI/CD pipeline integration
+- **Contains**:
+  - Jenkins pipeline execution code
+  - Automated version updates from pipeline
+  - Build artifacts and deployment configurations
+  - Continuous integration workflows
+
+### Branch Workflow
+```
+main branch (stable) ←→ jenkins-jobs branch (CI/CD active)
+     ↓                           ↓
+Documentation &            Pipeline execution &
+Stable releases           Automated commits
+```
+
+The [Jenkinsfile](Jenkinsfile) is configured to push version updates to the `jenkins-jobs` branch:
+```groovy
+sh 'git push origin HEAD:jenkins-jobs'
+```
+
+This ensures that:
+- ✅ Pipeline automation doesn't interfere with main branch stability
+- ✅ Version increments are tracked in the CI/CD branch
+- ✅ Main branch remains clean for releases and documentation
+- ✅ Both branches maintain full project functionality
 
 ## 🎯 Pipeline Success
 
-![Successful Pipeline](asset/Successful-Pipeline-10.png)
+![happiness of execution](asset/Successful-Pipeline-10.png)
 ![Pipeline Stages](asset/Stages-10.png)
 ![EC2](AWS-EC2.png)
 ![Docker-Container](Docker-Container.png)
