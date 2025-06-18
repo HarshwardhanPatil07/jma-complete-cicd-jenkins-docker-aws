@@ -1,11 +1,14 @@
 #!/usr/bin/env groovy
 
 library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
-    [$class: 'GitSCMSource',
-    remote: 'https://github.com/HarshwardhanPatil07/jenkins-java-maven-app.git',
-    credentialsID: 'gitlab-credentials'
-    ]
+        [$class: 'GitSCMSource',
+         remote: 'https://github.com/HarshwardhanPatil07/jenkins-shared-library',
+         credentialsId: 'github-credentials'
+        ]
 )
+
+
+def gv
 
 pipeline {
     agent any
@@ -13,60 +16,33 @@ pipeline {
         maven 'maven-3.9'
     }
     stages {
-        stage('increment version') {
+        stage("init") {
             steps {
                 script {
-                    echo 'incrementing app version...'
-                    sh 'mvn build-helper:parse-version versions:set \
-                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
-                        versions:commit'
-                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
-                    def version = matcher[0][1]
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    gv = load "script.groovy"
                 }
             }
         }
-        stage('build app') {
-            steps {
-                echo 'building application jar...'
-                buildJar()
-            }
-        }
-        stage('build image') {
+        stage("build jar") {
             steps {
                 script {
-                    echo 'building the docker image...'
-                    buildImage(env.IMAGE_NAME)
+                    buildJar()
+                }
+            }
+        }
+        stage("build and push image") {
+            steps {
+                script {
+                    buildImage 'harshwardhan07/harshwardhan:jenkinsJMA-3.0'
                     dockerLogin()
-                    dockerPush(env.IMAGE_NAME)
+                    dockerPush 'harshwardhan07/harshwardhan:jenkinsJMA-3.0'
                 }
             }
-        } 
+        }
         stage("deploy") {
             steps {
                 script {
-                    echo 'deploying docker image to EC2...'
-
-                    def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
-                    def ec2Instance = "ec2-user@107.23.253.31"
-
-                    sshagent(['ec2-server-key']) {
-                        sh "scp server-cmds.sh ${ec2Instance}:/home/ec2-user"
-                        sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
-                    }
-                }
-            }               
-        }
-        stage('commit version update'){
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh 'git remote set-url origin https://$USER:$PASS@github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git'
-                        sh 'git add .'
-                        sh 'git commit -m "ci: version bump"'
-                        sh 'git push origin HEAD:jenkins-jobs'
-                    }
+                    gv.deployApp()
                 }
             }
         }
