@@ -1,5 +1,9 @@
-def call() {
+def call(imageName = null) {
     echo "building the docker image..."
+    
+    // Use provided image name or default
+    def dockerImage = imageName ?: "harshwardhan07/harshwardhan:jenkinsJMA-1.0"
+    echo "Building Docker image: ${dockerImage}"
     
     // Check if Docker is available and daemon is running
     script {
@@ -43,8 +47,8 @@ Error: ${e.getMessage()}
     }
     
     withCredentials([usernamePassword(credentialsId: '73b703cb-6da5-46be-b448-5954f154defe', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t harshwardhan07/harshwardhan:jenkinsJMA-1.0 .'
+        sh "docker build -t harshwardhan07/harshwardhan:${dockerImage} ."
         sh "echo $PASS | docker login -u $USER --password-stdin"
-        sh 'docker push harshwardhan07/harshwardhan:jenkinsJMA-1.0'
+        sh "docker push harshwardhan07/harshwardhan:${dockerImage}"
     }
 }
