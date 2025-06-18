@@ -31,10 +31,11 @@ pipeline {
             when {
                 expression {
                     try {
-                        sh 'docker --version'
+                        sh 'docker version'  // This will fail if daemon not running
                         return true
                     } catch (Exception e) {
-                        echo "Docker not available. Skipping Docker build stage."
+                        echo "Docker daemon not available. Skipping Docker build stage."
+                        echo "Error: ${e.getMessage()}"
                         return false
                     }
                 }
