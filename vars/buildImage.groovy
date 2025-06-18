@@ -8,23 +8,33 @@ def call() {
             error "Docker is not installed on this Jenkins agent. Please install Docker or use a Docker-enabled agent."
         }
         
-        // Check if Docker daemon is running
-        def dockerRunning = sh(script: 'docker version > /dev/null 2>&1 && echo "running" || echo "stopped"', returnStdout: true).trim()
-        if (dockerRunning == "stopped") {
-            echo "Docker daemon is not running. Attempting to start Docker service..."
+        // Check if Docker daemon is running and accessible
+        def dockerAccessible = sh(script: 'docker version > /dev/null 2>&1 && echo "accessible" || echo "denied"', returnStdout: true).trim()
+        if (dockerAccessible == "denied") {
+            echo "Docker daemon permission denied. Attempting to fix permissions..."
             try {
-                sh 'sudo systemctl start docker'
-                sh 'sleep 5'  // Wait for daemon to start
-                // Verify daemon started
-                sh 'docker version'
-                echo "Docker daemon started successfully!"
+                // Try to fix Docker socket permissions
+                sh 'sudo chmod 666 /var/run/docker.sock || true'
+                sh 'sleep 2'
+                
+                // Verify Docker is now accessible
+                def retryAccessible = sh(script: 'docker version > /dev/null 2>&1 && echo "accessible" || echo "denied"', returnStdout: true).trim()
+                if (retryAccessible == "denied") {
+                    error """
+Docker daemon is running but not accessible to jenkins user.
+Please fix Docker permissions on the Jenkins agent:
+- sudo usermod -aG docker jenkins
+- sudo systemctl restart jenkins
+- Or run: sudo chmod 666 /var/run/docker.sock
+"""
+                }
+                echo "Docker permissions fixed successfully!"
             } catch (Exception e) {
                 error """
-Docker daemon is not running and cannot be started automatically.
-Please start Docker daemon manually on the Jenkins agent:
-- sudo systemctl start docker
-- sudo systemctl enable docker
+Docker daemon permission denied and cannot be fixed automatically.
+Please fix Docker permissions manually on the Jenkins agent:
 - sudo usermod -aG docker jenkins (then restart Jenkins)
+- Or run: sudo chmod 666 /var/run/docker.sock
 
 Error: ${e.getMessage()}
 """
