@@ -28,6 +28,17 @@ pipeline {
             }
         }
         stage('build image') {
+            when {
+                expression {
+                    try {
+                        sh 'docker --version'
+                        return true
+                    } catch (Exception e) {
+                        echo "Docker not available. Skipping Docker build stage."
+                        return false
+                    }
+                }
+            }
             steps {
                 script {
                     buildImage()
