@@ -1,11 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
-    [$class: 'GitSCMSource',
-    remote: 'https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git',
-    credentialsID: 'github-credentials'
-    ]
-)
+@Library('jenkins-shared-library@jenkins-shared-library') _
 
 pipeline {
     agent any
@@ -35,18 +30,16 @@ pipeline {
         stage('build image') {
             steps {
                 script {
-                    echo 'building the docker image...'
-                    buildImage(env.IMAGE_NAME)
-                    dockerLogin()
-                    dockerPush(env.IMAGE_NAME)
+                    buildImage()
                 }
             }
         } 
         stage("deploy") {
             steps {
                 script {
-                    echo 'deploying docker image to EC2...'
-
+                    deployApp()
+                    
+                    // Custom deployment logic for EC2
                     def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
                     def ec2Instance = "ec2-user@107.23.253.31"
 
