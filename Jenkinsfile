@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    buildImage()
+                    buildImage(env.IMAGE_NAME)
                 }
             }
         } 
