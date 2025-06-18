@@ -2,7 +2,7 @@
 
 library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
     [$class: 'GitSCMSource',
-    remote: 'https://github.com/HarshwardhanPatil07/JMA-jenkins-docker-AWS.git',
+    remote: 'https://github.com/HarshwardhanPatil07/jenkins-java-maven-app.git',
     credentialsID: 'gitlab-credentials'
     ]
 )
